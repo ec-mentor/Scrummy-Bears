@@ -8,38 +8,15 @@ public class ProfileDTO
     private Long id;
     private String username;
     private String fullName;
-    private Optional<String> companyName;
-    private int age;
-    private Optional<String> description;
+    private String companyName;
+    private Integer age;
+    private String description;
 
     public ProfileDTO()
     {
     }
 
-    public ProfileDTO(String username, String fullName, int age)
-    {
-        this.username = username;
-        this.fullName = fullName;
-        this.age = age;
-    }
-
-    public ProfileDTO(String username, String fullName, int age, Optional<String> description)
-    {
-        this.username = username;
-        this.fullName = fullName;
-        this.age = age;
-        this.description = description;
-    }
-
-    public ProfileDTO(String username, String fullName, Optional<String> companyName, Optional<String> description)
-    {
-        this.username = username;
-        this.fullName = fullName;
-        this.companyName = companyName;
-        this.description = description;
-    }
-
-    public ProfileDTO(String username, String fullName, Optional<String> companyName, int age, Optional<String> description)
+    public ProfileDTO(String username, String fullName, String companyName, Integer age, String description)
     {
         this.username = username;
         this.fullName = fullName;
@@ -78,32 +55,32 @@ public class ProfileDTO
         this.fullName = fullName;
     }
 
-    public Optional<String> getCompanyName()
+    public String getCompanyName()
     {
         return companyName;
     }
 
-    public void setCompanyName(Optional<String> companyName)
+    public void setCompanyName(String companyName)
     {
         this.companyName = companyName;
     }
 
-    public int getAge()
+    public Integer getAge()
     {
         return age;
     }
 
-    public void setAge(int age)
+    public void setAge(Integer age)
     {
         this.age = age;
     }
 
-    public Optional<String> getDescription()
+    public String getDescription()
     {
         return description;
     }
 
-    public void setDescription(Optional<String> description)
+    public void setDescription(String description)
     {
         this.description = description;
     }
@@ -114,7 +91,7 @@ public class ProfileDTO
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProfileDTO that = (ProfileDTO) o;
-        return age == that.age && Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(fullName, that.fullName) && Objects.equals(companyName, that.companyName) && Objects.equals(description, that.description);
+        return Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(fullName, that.fullName) && Objects.equals(companyName, that.companyName) && Objects.equals(age, that.age) && Objects.equals(description, that.description);
     }
 
     @Override

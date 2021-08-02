@@ -1,7 +1,10 @@
 package academy.everyonecodes.java.service;
 
 import academy.everyonecodes.java.data.ProfileDTO;
+import academy.everyonecodes.java.data.User;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class UserToProfileDTOTranslator
@@ -10,7 +13,7 @@ public class UserToProfileDTOTranslator
     {
         return new ProfileDTO(
                 user.getUsername(),
-                user.getFirstName() + " " + user.getLastName(),
+                user.getFirstNamePerson() + " " + user.getLastNamePerson(),
                 user.getCompanyName(),
                 ageCalculator.calculate(user),
                 user.getDescription()
