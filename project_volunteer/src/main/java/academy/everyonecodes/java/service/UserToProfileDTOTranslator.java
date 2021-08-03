@@ -9,6 +9,13 @@ import java.time.LocalDateTime;
 @Service
 public class UserToProfileDTOTranslator
 {
+    private final AgeCalculator ageCalculator;
+
+    public UserToProfileDTOTranslator(AgeCalculator ageCalculator)
+    {
+        this.ageCalculator = ageCalculator;
+    }
+
     public ProfileDTO toDTO(User user)
     {
         return new ProfileDTO(

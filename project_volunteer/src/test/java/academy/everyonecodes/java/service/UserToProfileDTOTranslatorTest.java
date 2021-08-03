@@ -23,26 +23,26 @@ class UserToProfileDTOTranslatorTest
     private AgeCalculator ageCalculator;
 
     @Test
-    void get_everything_existing()
+    void toDTO_everything_existing()
     {
         ProfileDTO profileDTO = new ProfileDTO(
                 "name",
                 "First Last",
-                Optional.of("company"),
-                Optional.of(69),
-                Optional.of("description")
+                "company",
+               69,
+                "description"
                 );
         User user = new User(
                 "name",
                 "First",
                 "Last",
-                Optional.of("company"),
+                "company",
                 LocalDate.of(2021, 8, 2),
-                Optional.of("description")
+                "description"
         );
 
         Mockito.when(ageCalculator.calculate(user))
-                .thenReturn(Optional.of(69));
+                .thenReturn(69);
 
         var expected = profileDTO;
         var actual = userToProfileDTOTranslator.toDTO(user);
@@ -50,26 +50,26 @@ class UserToProfileDTOTranslatorTest
     }
 
     @Test
-    void get_no_company()
+    void toDTO_no_company()
     {
         ProfileDTO profileDTO = new ProfileDTO(
                 "name",
                 "First Last",
-                Optional.empty(),
-                Optional.of(69),
-                Optional.of("description")
+                null,
+                69,
+                "description"
         );
         User user = new User(
                 "name",
                 "First",
                 "Last",
-                Optional.empty(),
+                null,
                 LocalDate.of(2021, 8, 2),
-                Optional.of("description")
+                "description"
         );
 
         Mockito.when(ageCalculator.calculate(user))
-                .thenReturn(Optional.of(69));
+                .thenReturn(69);
 
         var expected = profileDTO;
         var actual = userToProfileDTOTranslator.toDTO(user);
@@ -77,26 +77,26 @@ class UserToProfileDTOTranslatorTest
     }
 
     @Test
-    void get_no_age()
+    void toDTO_no_age()
     {
         ProfileDTO profileDTO = new ProfileDTO(
                 "name",
                 "First Last",
-                Optional.of("company"),
-                Optional.empty(),
-                Optional.of("description")
+                "company",
+                null,
+                "description"
         );
         User user = new User(
                 "name",
                 "First",
                 "Last",
-                Optional.of("company"),
-                Optional.empty(),
-                Optional.of("description")
+                "company",
+                null,
+                "description"
         );
 
         Mockito.when(ageCalculator.calculate(user))
-                .thenReturn(Optional.empty());
+                .thenReturn(null);
 
         var expected = profileDTO;
         var actual = userToProfileDTOTranslator.toDTO(user);
@@ -104,26 +104,26 @@ class UserToProfileDTOTranslatorTest
     }
 
     @Test
-    void get_no_description()
+    void toDTO_no_description()
     {
         ProfileDTO profileDTO = new ProfileDTO(
                 "name",
                 "First Last",
-                Optional.of("company"),
-                Optional.of(69),
-                Optional.empty()
+                "company",
+                69,
+                null
         );
         User user = new User(
                 "name",
                 "First",
                 "Last",
-                Optional.of("company"),
+                "company",
                 LocalDate.of(2021, 8, 2),
-                Optional.empty()
+                null
         );
 
         Mockito.when(ageCalculator.calculate(user))
-                .thenReturn(Optional.of(69));
+                .thenReturn(69);
 
         var expected = profileDTO;
         var actual = userToProfileDTOTranslator.toDTO(user);
@@ -131,26 +131,26 @@ class UserToProfileDTOTranslatorTest
     }
 
     @Test
-    void get_only_mandatory()
+    void toDTO_only_mandatory()
     {
         ProfileDTO profileDTO = new ProfileDTO(
                 "name",
                 "First Last",
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty()
+                null,
+                null,
+                null
         );
         User user = new User(
                 "name",
                 "First",
                 "Last",
-                Optional.empty(),
-                Optional.empty(),
-                Optional.empty()
+                null,
+                null,
+                null
         );
 
         Mockito.when(ageCalculator.calculate(user))
-                .thenReturn(Optional.empty());
+                .thenReturn(null);
 
         var expected = profileDTO;
         var actual = userToProfileDTOTranslator.toDTO(user);

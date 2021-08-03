@@ -1,14 +1,18 @@
 package academy.everyonecodes.java.service;
 
 import academy.everyonecodes.java.data.User;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.time.Clock;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Optional;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -18,12 +22,12 @@ class AgeCalculatorTest
     private AgeCalculator ageCalculator;
 
     @MockBean
-    private LocalDate localDate;
+    private DateProvider dateProvider;
 
     @Test
     void calculate_age_existing()
     {
-        Mockito.when(LocalDate.now())
+        Mockito.when(dateProvider.getNow())
                 .thenReturn(LocalDate.of(2021, 8, 2));
         User user = new User(
                 LocalDate.of(1952, 8, 1)
@@ -31,19 +35,19 @@ class AgeCalculatorTest
 
         var expected = 69;
         var actual = ageCalculator.calculate(user);
-        Assertions.assertEquals(expected, actual.get());
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void calculate_age_not_existing()
     {
-        Mockito.when(LocalDate.now())
+        Mockito.when(dateProvider.getNow())
                 .thenReturn(LocalDate.of(2021, 8, 2));
         User user = new User(
-                Optional.empty()
+                null
         );
 
         var actual = ageCalculator.calculate(user);
-        Assertions.assertTrue(actual.isEmpty());
+        Assertions.assertNull(actual);
     }
 }
